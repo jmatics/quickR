@@ -6,10 +6,20 @@
     <description>Recent content in Posts on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Dec 2016 21:49:57 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 13 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Boxplot with trend line</title>
+      <link>/2018/04/13/boxplot-with-trend-line/</link>
+      <pubDate>Fri, 13 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/04/13/boxplot-with-trend-line/</guid>
+      <description>BackgroundLast week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of the each data box. So this post explains how to draw a graph like that using two ways;
+r ggplot2 libraryr base plots (used codes from The R Graph Gallery - https://www.r-graph-gallery.com/146-boxplot-for-time-series/)The dataThis data is sample data set from my collegue.</description>
+    </item>
     
     <item>
       <title>A Plain Markdown Post</title>
