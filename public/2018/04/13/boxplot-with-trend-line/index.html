@@ -76,7 +76,7 @@
 <p>Last week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of each data box. So this post explains how to draw a graph like that using two ways;</p>
 <ul>
 <li><strong>r</strong> <em>ggplot2</em> library</li>
-<li><strong>r</strong> <em>base plots</em> (used codes from The R Graph Gallery - <a href="https://www.r-graph-gallery.com/146-boxplot-for-time-series/" class="uri">https://www.r-graph-gallery.com/146-boxplot-for-time-series/</a>)</li>
+<li><strong>r</strong> <em>base plots</em> (using codes from <a href="https://www.r-graph-gallery.com/146-boxplot-for-time-series/">The R Graph Gallery</a>)</li>
 </ul>
 </div>
 <div id="the-data" class="section level2">
@@ -130,7 +130,8 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
 <h3>Plot with <em>base</em> library</h3>
 <pre class="r"><code># Make the boxplot
 boxplot(sample.df$NDVI ~ sample.df$crop+sample.df$date , ylim=c(-0.2,1.2), xaxt=&quot;n&quot; , xlab=&quot;Date&quot; , col=my_colors , pch=20 , cex=0.3 , 
-        ylab=&quot;VI&quot;, xlab=&quot;Date&quot;, main=&quot;Phenology of the selected crops \n VI extracted from Landsat 8 time series data&quot; )
+        ylab=&quot;VI&quot;, xlab=&quot;Date&quot;, 
+        main=&quot;Phenology of the selected crops \n VI extracted from Landsat 8 time series data&quot; )
 abline(v= seq(0, 3*6, 3) + 0.5 , col=&quot;grey&quot;)
 axis(1, labels=levels(sample.df$date) , at=seq(2,3*6,3) )
 

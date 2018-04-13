@@ -17,7 +17,7 @@ tags:
 Last week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of each data box. So this post explains how to draw a graph like that using two ways;
 
 + **r** *ggplot2* library 
-+ **r** *base plots* (used codes from The R Graph Gallery - https://www.r-graph-gallery.com/146-boxplot-for-time-series/)
++ **r** *base plots* (using codes from [The R Graph Gallery](https://www.r-graph-gallery.com/146-boxplot-for-time-series/))
 
 ## The data
 
@@ -75,7 +75,8 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
 ```{r echo = TRUE, error = FALSE, warning = FALSE, message = FALSE, fig.width=10, fig.height=4}
 # Make the boxplot
 boxplot(sample.df$NDVI ~ sample.df$crop+sample.df$date , ylim=c(-0.2,1.2), xaxt="n" , xlab="Date" , col=my_colors , pch=20 , cex=0.3 , 
-        ylab="VI", xlab="Date", main="Phenology of the selected crops \n VI extracted from Landsat 8 time series data" )
+        ylab="VI", xlab="Date", 
+        main="Phenology of the selected crops \n VI extracted from Landsat 8 time series data" )
 abline(v= seq(0, 3*6, 3) + 0.5 , col="grey")
 axis(1, labels=levels(sample.df$date) , at=seq(2,3*6,3) )
 
