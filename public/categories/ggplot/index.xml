@@ -17,8 +17,8 @@
       <pubDate>Fri, 13 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/04/13/boxplot-with-trend-line/</guid>
-      <description>BackgroundLast week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of the each data box. So this post explains how to draw a graph like that using two ways;
-r ggplot2 libraryr base plots (used codes from The R Graph Gallery - https://www.r-graph-gallery.com/146-boxplot-for-time-series/)The dataThis data is sample data set from my collegue.</description>
+      <description>BackgroundLast week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of each data box. So this post explains how to draw a graph like that using two ways;
+r ggplot2 libraryr base plots (used codes from The R Graph Gallery - https://www.r-graph-gallery.com/146-boxplot-for-time-series/)The dataThis data is sample data set from my colleague.</description>
     </item>
     
   </channel>
