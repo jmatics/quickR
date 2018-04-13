@@ -21,7 +21,7 @@ Last week my colleague showed me a drawn graph and asked can we plot this kind o
 
 ## The data
 
-This data is sample data set from my colleague. The data contains NDVI (Normalize Different Vegetation Index) time series values for three different crops (Maize, Potatoes, Sugar beet) extracted from Landsat 8 data.
+This data is sample data set from my colleague. The data contains VI (Vegetation Index) time series values for three different crops extracted from Landsat 8 data.
 
 ### Load data
 
@@ -37,16 +37,16 @@ library(RColorBrewer)
 
 #### Read and prepare data
 ```{r echo = TRUE, error = FALSE, warning = FALSE, message = FALSE}
-read.df <- read.csv("D:/Blog_data/later_summercrop_ts.csv", header = TRUE)
+read.df <- read.csv("D:/Blog_data/sample_ts.csv", header = TRUE)
 sample.df <- read.df # Make a copy of the read table
 
 levels(sample.df$date) # Checking the levels in the date column
 levels(sample.df$crop) # Checking the levels in the crop column
 
 # Reorder levels
-sample.df$date <- factor(sample.df$date, levels = c("15-Apr-15", "24-Apr-15", "10-May-15", "04-Jul-15","07-Aug-15", "21-Aug-15", "23-Aug-15", "30-Aug-15"))
+sample.df$date <- factor(sample.df$date, levels = c("April", "May", "June", "July","August", "September"))
 
-sample.df$crop <- factor(sample.df$crop, levels = c("maize", "potato", "sugar beet"))
+sample.df$crop <- factor(sample.df$crop, levels = c("Crop 01", "Crop 02", "Crop 03"))
 ```
 
 ### Plot with *ggplot* library
@@ -64,10 +64,10 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
   stat_summary(fun.y=mean, colour="red", aes(group=1),
                geom="line", lwd=1, lty=1) +
   theme_bw(base_size = 12) +
-  scale_fill_manual(values = my_colors, name = "Crop Type", labels = c("Maize","Potato","Sugar beet")) +
-  labs(x="Date", y="NDVI", 
-       title="Phenology of the late summer crops", 
-       subtitle="NDVI extracted from Landsat 8 time series data")
+  scale_fill_manual(values = my_colors, name = "Crop Type", labels = c("Crop 01", "Crop 02", "Crop 03")) +
+  labs(x="Date", y="VI", 
+       title="Phenology of the selected crops", 
+       subtitle="VI extracted from Landsat 8 time series data")
 ```
 
 ### Plot with *base* library
@@ -75,9 +75,9 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
 ```{r echo = TRUE, error = FALSE, warning = FALSE, message = FALSE, fig.width=10, fig.height=4}
 # Make the boxplot
 boxplot(sample.df$NDVI ~ sample.df$crop+sample.df$date , ylim=c(-0.2,1.2), xaxt="n" , xlab="Date" , col=my_colors , pch=20 , cex=0.3 , 
-        ylab="NDVI", xlab="Date", main="Phenology of the late summer crops \n NDVI extracted from Landsat 8 time series data" )
-abline(v= seq(0, 3*8, 3) + 0.5 , col="grey")
-axis(1, labels=levels(sample.df$date) , at=seq(2,3*8,3) )
+        ylab="VI", xlab="Date", main="Phenology of the selected crops \n VI extracted from Landsat 8 time series data" )
+abline(v= seq(0, 3*6, 3) + 0.5 , col="grey")
+axis(1, labels=levels(sample.df$date) , at=seq(2,3*6,3) )
 
 
 # Add general trend
@@ -86,5 +86,5 @@ lines(a[,3], type="l" , col="red" , lwd=2)
 
 
 #Add legend for crops
-legend("top", fill = my_colors, legend = c("Maize","Potato","Sugar beet"), horiz = T)
+legend("top", fill = my_colors, legend = c("Crop 01", "Crop 02", "Crop 03"), horiz = T)
 ```

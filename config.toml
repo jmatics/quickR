@@ -21,6 +21,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     description = "A blog to show my daily r codes."
+    disqusURL = "https://quickr.netlify.com/"
+    fullURL = "https://quickr.netlify.com/"
+    githubContentURL = "https://github.com/jmatics/quickR/tree/master/content/"
+    customCSS = ["css/custom.css"]
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"

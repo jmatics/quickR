@@ -24,7 +24,7 @@ tags:
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
-<p>This data is sample data set from my colleague. The data contains NDVI (Normalize Different Vegetation Index) time series values for three different crops (Maize, Potatoes, Sugar beet) extracted from Landsat 8 data.</p>
+<p>This data is sample data set from my colleague. The data contains VI (Vegetation Index) time series values for three different crops extracted from Landsat 8 data.</p>
 <div id="load-data" class="section level3">
 <h3>Load data</h3>
 <div id="load-libraries" class="section level4">
@@ -37,18 +37,17 @@ library(RColorBrewer)</code></pre>
 </div>
 <div id="read-and-prepare-data" class="section level4">
 <h4>Read and prepare data</h4>
-<pre class="r"><code>read.df &lt;- read.csv(&quot;D:/Blog_data/later_summercrop_ts.csv&quot;, header = TRUE)
+<pre class="r"><code>read.df &lt;- read.csv(&quot;D:/Blog_data/sample_ts.csv&quot;, header = TRUE)
 sample.df &lt;- read.df # Make a copy of the read table
 
 levels(sample.df$date) # Checking the levels in the date column</code></pre>
-<pre><code>## [1] &quot;04-Jul-15&quot; &quot;07-Aug-15&quot; &quot;10-May-15&quot; &quot;15-Apr-15&quot; &quot;21-Aug-15&quot; &quot;23-Aug-15&quot;
-## [7] &quot;24-Apr-15&quot; &quot;30-Aug-15&quot;</code></pre>
+<pre><code>## [1] &quot;April&quot;     &quot;August&quot;    &quot;July&quot;      &quot;June&quot;      &quot;May&quot;       &quot;September&quot;</code></pre>
 <pre class="r"><code>levels(sample.df$crop) # Checking the levels in the crop column</code></pre>
-<pre><code>## [1] &quot;maize&quot;      &quot;potato&quot;     &quot;sugar beet&quot;</code></pre>
+<pre><code>## [1] &quot;Crop 01&quot; &quot;Crop 02&quot; &quot;Crop 03&quot;</code></pre>
 <pre class="r"><code># Reorder levels
-sample.df$date &lt;- factor(sample.df$date, levels = c(&quot;15-Apr-15&quot;, &quot;24-Apr-15&quot;, &quot;10-May-15&quot;, &quot;04-Jul-15&quot;,&quot;07-Aug-15&quot;, &quot;21-Aug-15&quot;, &quot;23-Aug-15&quot;, &quot;30-Aug-15&quot;))
+sample.df$date &lt;- factor(sample.df$date, levels = c(&quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;,&quot;August&quot;, &quot;September&quot;))
 
-sample.df$crop &lt;- factor(sample.df$crop, levels = c(&quot;maize&quot;, &quot;potato&quot;, &quot;sugar beet&quot;))</code></pre>
+sample.df$crop &lt;- factor(sample.df$crop, levels = c(&quot;Crop 01&quot;, &quot;Crop 02&quot;, &quot;Crop 03&quot;))</code></pre>
 </div>
 </div>
 <div id="plot-with-ggplot-library" class="section level3">
@@ -64,19 +63,19 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
   stat_summary(fun.y=mean, colour=&quot;red&quot;, aes(group=1),
                geom=&quot;line&quot;, lwd=1, lty=1) +
   theme_bw(base_size = 12) +
-  scale_fill_manual(values = my_colors, name = &quot;Crop Type&quot;, labels = c(&quot;Maize&quot;,&quot;Potato&quot;,&quot;Sugar beet&quot;)) +
-  labs(x=&quot;Date&quot;, y=&quot;NDVI&quot;, 
-       title=&quot;Phenology of the late summer crops&quot;, 
-       subtitle=&quot;NDVI extracted from Landsat 8 time series data&quot;)</code></pre>
+  scale_fill_manual(values = my_colors, name = &quot;Crop Type&quot;, labels = c(&quot;Crop 01&quot;, &quot;Crop 02&quot;, &quot;Crop 03&quot;)) +
+  labs(x=&quot;Date&quot;, y=&quot;VI&quot;, 
+       title=&quot;Phenology of the selected crops&quot;, 
+       subtitle=&quot;VI extracted from Landsat 8 time series data&quot;)</code></pre>
 <p><img src="/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
 </div>
 <div id="plot-with-base-library" class="section level3">
 <h3>Plot with <em>base</em> library</h3>
 <pre class="r"><code># Make the boxplot
 boxplot(sample.df$NDVI ~ sample.df$crop+sample.df$date , ylim=c(-0.2,1.2), xaxt=&quot;n&quot; , xlab=&quot;Date&quot; , col=my_colors , pch=20 , cex=0.3 , 
-        ylab=&quot;NDVI&quot;, xlab=&quot;Date&quot;, main=&quot;Phenology of the late summer crops \n NDVI extracted from Landsat 8 time series data&quot; )
-abline(v= seq(0, 3*8, 3) + 0.5 , col=&quot;grey&quot;)
-axis(1, labels=levels(sample.df$date) , at=seq(2,3*8,3) )
+        ylab=&quot;VI&quot;, xlab=&quot;Date&quot;, main=&quot;Phenology of the selected crops \n VI extracted from Landsat 8 time series data&quot; )
+abline(v= seq(0, 3*6, 3) + 0.5 , col=&quot;grey&quot;)
+axis(1, labels=levels(sample.df$date) , at=seq(2,3*6,3) )
 
 
 # Add general trend
@@ -85,7 +84,7 @@ lines(a[,3], type=&quot;l&quot; , col=&quot;red&quot; , lwd=2)
 
 
 #Add legend for crops
-legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Maize&quot;,&quot;Potato&quot;,&quot;Sugar beet&quot;), horiz = T)</code></pre>
+legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Crop 01&quot;, &quot;Crop 02&quot;, &quot;Crop 03&quot;), horiz = T)</code></pre>
 <p><img src="/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
 </div>
 </div>
