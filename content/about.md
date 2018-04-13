@@ -1,6 +1,6 @@
 ---
 title: "About"
-date: "2016-05-05T21:48:51-07:00"
+date: "2018-04-03T10:30:00+01:00"
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium-theme).
+Hello, I am PhD student who works with **GIS**, **Remote Sensing** data in **r**. This my first blog using the **blogdown** package. I will post **r** codes that I use for my work.
