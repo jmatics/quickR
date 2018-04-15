@@ -7,9 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 13 Apr 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Boxplot with trend line</title>
@@ -17,8 +15,82 @@
       <pubDate>Fri, 13 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/04/13/boxplot-with-trend-line/</guid>
-      <description>BackgroundLast week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of each data box. So this post explains how to draw a graph like that using two ways;
-r ggplot2 libraryr base plots (using codes from The R Graph Gallery)The dataThis data is sample data set from my colleague.</description>
+      <description>&lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;Last week my colleague showed me a drawn graph and asked can we plot this kind of graph. It is a graph with grouped boxplot. Additionally, it contains a trend line that connects mean of each data box. So this post explains how to draw a graph like that using two ways;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;r&lt;/strong&gt; &lt;em&gt;ggplot2&lt;/em&gt; library&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;r&lt;/strong&gt; &lt;em&gt;base plots&lt;/em&gt; (using codes from &lt;a href=&#34;https://www.r-graph-gallery.com/146-boxplot-for-time-series/&#34;&gt;The R Graph Gallery&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The data&lt;/h2&gt;
+&lt;p&gt;This data is sample data set from my colleague. The data contains VI (Vegetation Index) time series values for three different crops extracted from Landsat 8 data.&lt;/p&gt;
+&lt;div id=&#34;load-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Load data&lt;/h3&gt;
+&lt;div id=&#34;load-libraries&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Load libraries&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(readr)
+library(plyr)
+library(dplyr)
+library(RColorBrewer)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;read-and-prepare-data&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Read and prepare data&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.df &amp;lt;- read.csv(&amp;quot;D:/Blog_data/sample_ts.csv&amp;quot;, header = TRUE)
+sample.df &amp;lt;- read.df # Make a copy of the read table
+
+levels(sample.df$date) # Checking the levels in the date column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;April&amp;quot;     &amp;quot;August&amp;quot;    &amp;quot;July&amp;quot;      &amp;quot;June&amp;quot;      &amp;quot;May&amp;quot;       &amp;quot;September&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;levels(sample.df$crop) # Checking the levels in the crop column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Crop 01&amp;quot; &amp;quot;Crop 02&amp;quot; &amp;quot;Crop 03&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Reorder levels
+sample.df$date &amp;lt;- factor(sample.df$date, levels = c(&amp;quot;April&amp;quot;, &amp;quot;May&amp;quot;, &amp;quot;June&amp;quot;, &amp;quot;July&amp;quot;,&amp;quot;August&amp;quot;, &amp;quot;September&amp;quot;))
+
+sample.df$crop &amp;lt;- factor(sample.df$crop, levels = c(&amp;quot;Crop 01&amp;quot;, &amp;quot;Crop 02&amp;quot;, &amp;quot;Crop 03&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-with-ggplot-library&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plot with &lt;em&gt;ggplot&lt;/em&gt; library&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Create a color palette for three crops
+my_colors = c(&amp;quot;greenyellow&amp;quot;, &amp;quot;gold3&amp;quot;, &amp;quot;darksalmon&amp;quot;)
+
+# Create a plot
+ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
+  geom_boxplot() + ylim(c(-0.2,1.2)) +
+  stat_summary(fun.y=mean, colour=&amp;quot;red&amp;quot;,
+               geom=&amp;quot;point&amp;quot;,position=position_dodge(width=0.75)) +
+  stat_summary(fun.y=mean, colour=&amp;quot;red&amp;quot;, aes(group=1),
+               geom=&amp;quot;line&amp;quot;, lwd=1, lty=1) +
+  theme_bw(base_size = 12) +
+  scale_fill_manual(values = my_colors, name = &amp;quot;Crop Type&amp;quot;, labels = c(&amp;quot;Crop 01&amp;quot;, &amp;quot;Crop 02&amp;quot;, &amp;quot;Crop 03&amp;quot;)) +
+  labs(x=&amp;quot;Date&amp;quot;, y=&amp;quot;VI&amp;quot;, 
+       title=&amp;quot;Phenology of the selected crops&amp;quot;, 
+       subtitle=&amp;quot;VI extracted from Landsat 8 time series data&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-with-base-library&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plot with &lt;em&gt;base&lt;/em&gt; library&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make the boxplot
+boxplot(sample.df$NDVI ~ sample.df$crop+sample.df$date , ylim=c(-0.2,1.2), xaxt=&amp;quot;n&amp;quot; , xlab=&amp;quot;Date&amp;quot; , col=my_colors , pch=20 , cex=0.3 , 
+        ylab=&amp;quot;VI&amp;quot;, xlab=&amp;quot;Date&amp;quot;, 
+        main=&amp;quot;Phenology of the selected crops \n VI extracted from Landsat 8 time series data&amp;quot; )
+abline(v= seq(0, 3*6, 3) + 0.5 , col=&amp;quot;grey&amp;quot;)
+axis(1, labels=levels(sample.df$date) , at=seq(2,3*6,3) )
+
+
+# Add general trend
+a=aggregate(sample.df$NDVI , by=list(sample.df$crop, sample.df$date) , mean)
+lines(a[,3], type=&amp;quot;l&amp;quot; , col=&amp;quot;red&amp;quot; , lwd=2)
+
+
+#Add legend for crops
+legend(&amp;quot;top&amp;quot;, fill = my_colors, legend = c(&amp;quot;Crop 01&amp;quot;, &amp;quot;Crop 02&amp;quot;, &amp;quot;Crop 03&amp;quot;), horiz = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -27,7 +99,8 @@
       <pubDate>Tue, 03 Apr 2018 10:30:00 +0100</pubDate>
       
       <guid>/about/</guid>
-      <description>Hello, I am PhD student who works with GIS, Remote Sensing data in r. This is my first blog using the blogdown package. I will post r codes that I use for my work.</description>
+      <description>&lt;p&gt;Hello, I am PhD student who works with &lt;strong&gt;GIS&lt;/strong&gt;, &lt;strong&gt;Remote Sensing&lt;/strong&gt; data in &lt;strong&gt;r&lt;/strong&gt;. This is my first blog using the &lt;strong&gt;blogdown&lt;/strong&gt; package. I will post &lt;strong&gt;r&lt;/strong&gt; codes that I use for my work.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
