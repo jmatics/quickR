@@ -18,6 +18,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "Twitter"
     url = "https://twitter.com/jmatics"
+[[menu.main]]
+    name = "web"
+    url = "https://quickr.netlify.com/"
 
 [params]
     description = "A blog to show my daily r codes."
