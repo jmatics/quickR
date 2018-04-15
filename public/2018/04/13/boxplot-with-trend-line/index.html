@@ -24,10 +24,10 @@
 
 
 
-<link rel="stylesheet" href="/css/fonts.css" media="all">
-<link rel="stylesheet" href="/css/main.css" media="all">
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
 
-<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="../../../../css/custom.css">
 
 
 
@@ -36,31 +36,31 @@
     <div class="wrapper">
       <header class="header">
         <nav class="nav">
-  <a href="/" class="nav-logo">
-    <img src="/images/jmatics_logo.jpg"
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/jmatics_logo.jpg"
          width="50"
          height="50"
          alt="Logo">
   </a>
 
-  <a href="/" class="nav-title">quickR</a>
+  <a href="../../../../" class="nav-title">quickR</a>
 
   <ul class="nav-links">
     
-    <li><a href="/about/">
-            <img alt="About" src="/images/About_logo.png" class="nav-link"/>
+    <li><a href="../../../../about/">
+            <img alt="About" src="../../../../images/About_logo.png" class="nav-link"/>
             </a></li>
     
     <li><a href="https://github.com/jmatics/quickR">
-            <img alt="GitHub" src="/images/GitHub_logo.png" class="nav-link"/>
+            <img alt="GitHub" src="../../../../images/GitHub_logo.png" class="nav-link"/>
             </a></li>
     
     <li><a href="https://twitter.com/jmatics">
-            <img alt="Twitter" src="/images/Twitter_logo.png" class="nav-link"/>
+            <img alt="Twitter" src="../../../../images/Twitter_logo.png" class="nav-link"/>
             </a></li>
     
     <li><a href="https://quickr.netlify.com/">
-            <img alt="web" src="/images/web_logo.png" class="nav-link"/>
+            <img alt="web" src="../../../../images/web_logo.png" class="nav-link"/>
             </a></li>
     
   </ul>
@@ -136,7 +136,7 @@ ggplot(data=sample.df, aes(x=date, y=NDVI, fill=crop)) +
   labs(x=&quot;Date&quot;, y=&quot;VI&quot;, 
        title=&quot;Phenology of the selected crops&quot;, 
        subtitle=&quot;VI extracted from Landsat 8 time series data&quot;)</code></pre>
-<p><img src="/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
+<p><img src="../../../../post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
 </div>
 <div id="plot-with-base-library" class="section level3">
 <h3>Plot with <em>base</em> library</h3>
@@ -155,7 +155,7 @@ lines(a[,3], type=&quot;l&quot; , col=&quot;red&quot; , lwd=2)
 
 #Add legend for crops
 legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Crop 01&quot;, &quot;Crop 02&quot;, &quot;Crop 03&quot;), horiz = T)</code></pre>
-<p><img src="/post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
+<p><img src="../../../../post/2018-04-13-boxplot-with-trend-line_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
 </div>
 </div>
 
@@ -163,6 +163,30 @@ legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Crop 01&quot;, &quot;
   </article>
 
   
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  
+  var disqus_config = function () {
+    this.page.url = "https:\/\/quickr.netlify.com\/" + location.pathname;
+  };
+  
+  (function() {
+   var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Jmatics.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
 
 
 </main>
@@ -170,7 +194,7 @@ legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Crop 01&quot;, &quot;
       <footer class="footer">
         <ul class="footer-links">
           <li>
-            <a href="https://creativecommons.org/licenses/by/4.0/legalcode"><img src="/images/cc-by.svg" height="28" style="vertical-align:middle;"></a>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode"><img src="../../../../images/cc-by.svg" height="28" style="vertical-align:middle;"></a>
           </li>
         </ul>
       </footer>
@@ -191,7 +215,7 @@ legend(&quot;top&quot;, fill = my_colors, legend = c(&quot;Crop 01&quot;, &quot;
 
 
     
-<script src="/js/math-code.js"></script>
+<script src="../../../../js/math-code.js"></script>
 <script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 

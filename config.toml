@@ -1,9 +1,10 @@
-baseurl = "/"
+baseurl = "https://quickr.netlify.com/"
+relativeurls = true
 languageCode = "en-us"
 title = "quickR"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
-disqusShortname = ""
+disqusShortname = "Jmatics"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
