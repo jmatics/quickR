@@ -4,8 +4,10 @@ languageCode = "en-us"
 title = "quickR"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
-disqusShortname = "Jmatics"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+# Enable comments by entering your Disqus shortname
+disqusShortname = "j-quickr"
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
